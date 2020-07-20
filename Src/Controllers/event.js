@@ -1,5 +1,7 @@
 const eventModel = require("../Models/event");
 const miscHelper = require("../Helpers");
+const {IP, port} = require('../Config/index')
+
 
 module.exports = {
   getAll: async (request, response) => {
@@ -9,6 +11,7 @@ module.exports = {
       const result = await eventModel.getAll(searchName);
       miscHelper.response(response, 200, result);
     } catch (error) {
+      console.log(error)
       miscHelper.customErrorResult(response, 404, "Internal Server Error!");
     }
   },
@@ -22,6 +25,7 @@ module.exports = {
         date,
         participant,
         note,
+        image : `http://${IP}:${port}/upload/${request.file.filename}`, 
       };
       console.log(data)
       const result = await eventModel.inputEvent(data);

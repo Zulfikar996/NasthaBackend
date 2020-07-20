@@ -8,4 +8,5 @@ module.exports ={
         database : process.env.DB_NAME
     },
     port : process.env.PORT,
+    IP: process.env.IP
 }
